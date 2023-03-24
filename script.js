@@ -18,15 +18,18 @@ let winState = false
 let playAgain = document.querySelector(".playAgain")
 let secondsInterval
 let minutesInterval
+let b4 = document.querySelector("#b4")
+let b5 = document.querySelector("#b5")
 let reset = document.querySelector(".reset")
-let easyMode = true
+let easy = document.querySelector(".easy")
+let medium = document.querySelector(".medium")
+let hard = document.querySelector(".hard")
+let easyMode = false
 let mediumMode = false
 let hardMode = false
 startGame()
 
 reset.addEventListener("click", resetBoard)
-
-console.log(towers)
 
 blocks.forEach((block) => {
     block.addEventListener("mouseover", () => {
@@ -36,6 +39,10 @@ blocks.forEach((block) => {
         block.style.background = "white"
     })
 })
+
+easy.addEventListener("click", changeMode)
+medium.addEventListener("click", changeMode)
+hard.addEventListener("click", changeMode)
 
 function startGame() {
     towers.forEach((tower) => {
@@ -177,12 +184,37 @@ function resetBoard () {
 }
 
 function mode() {
-    if (easyMode === true) {
-        towers[0].removeChild(towers[0].lastElementChild)
-        towers[0].removeChild(towers[0].lastElementChild)
-    } else if (mediumMode === true) {
-        towers[0].removeChild(towers[0].lastElementChild)
+    if (easyMode === true && towers[0].childElementCount > 3) {
+        for (let mi = 0; mi < towers[0].childElementCount - 2; mi++) {
+            towers[0].removeChild(towers[0].lastElementChild)
+        }
+    } else if (mediumMode === true && towers[0].childElementCount > 4) {
+        for (let mi = 0; mi < towers[0].childElementCount - 3; mi++) {
+            towers[0].removeChild(towers[0].lastElementChild)
+        }
+    } else if (hardMode === true && towers[0].childElementCount < 5) {
+        towers[0].append(b4, b5)
+    } else if (mediumMode === true && towers[0].childElementCount === 3) {
+        towers[0].append(b4)
     }
+}
+
+function changeMode(e) {
+    let modeText = e.target.innerText.toLowerCase()
+    if (modeText === "easy") {
+        easyMode = true
+        mediumMode = false
+        hardMode = false
+    } else if (modeText === "medium") {
+        easyMode = false
+        mediumMode = true
+        hardMode = false   
+    } else if (modeText === "hard") {
+        easyMode = false
+        mediumMode = false
+        hardMode = true
+    }
+    startGame()
 }
 
 function timer() {
