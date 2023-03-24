@@ -24,7 +24,7 @@ let reset = document.querySelector(".reset")
 let easy = document.querySelector(".easy")
 let medium = document.querySelector(".medium")
 let hard = document.querySelector(".hard")
-let easyMode = false
+let easyMode = true
 let mediumMode = false
 let hardMode = false
 startGame()
@@ -40,11 +40,14 @@ blocks.forEach((block) => {
     })
 })
 
-easy.addEventListener("click", changeMode)
-medium.addEventListener("click", changeMode)
-hard.addEventListener("click", changeMode)
+if (winState === false) {
+    easy.addEventListener("click", changeMode)
+    medium.addEventListener("click", changeMode)
+    hard.addEventListener("click", changeMode)
+}
 
 function startGame() {
+    winState = false
     towers.forEach((tower) => {
         tower.addEventListener("click", firstMove)
     })
@@ -140,22 +143,22 @@ function checkWinner() {
             clearInterval(secondsInterval)
             clearInterval(minutesInterval)
             winText.innerText = "You win!"
-           wC++
-           winC.innerText = `Wins: ${wC}`
-           playAgain.innerText = "Play again?"
-           playAgain.addEventListener("click", resetBoard)
-           winState = true
+            wC++
+            winC.innerText = `Wins: ${wC}`
+            playAgain.innerText = "Play again?"
+            playAgain.addEventListener("click", resetBoard)
+            winState = true
         }
     } else if (easyMode === true) {
         if (towers[2].childElementCount === 3) {
             clearInterval(secondsInterval)
             clearInterval(minutesInterval)
             winText.innerText = "You win!"
-           wC++
-           winC.innerText = `Wins: ${wC}`
-           playAgain.innerText = "Play again?"
-           playAgain.addEventListener("click", resetBoard)
-           winState = true
+            wC++
+            winC.innerText = `Wins: ${wC}`
+            playAgain.innerText = "Play again?"
+            playAgain.addEventListener("click", resetBoard)
+            winState = true
         }
     }
 }
@@ -192,7 +195,7 @@ function mode() {
         for (let mi = 0; mi < towers[0].childElementCount - 3; mi++) {
             towers[0].removeChild(towers[0].lastElementChild)
         }
-    } else if (hardMode === true && towers[0].childElementCount < 5) {
+    } else if (winState === false && hardMode === true && towers[0].childElementCount < 5) {
         towers[0].append(b4, b5)
     } else if (mediumMode === true && towers[0].childElementCount === 3) {
         towers[0].append(b4)
@@ -205,14 +208,20 @@ function changeMode(e) {
         easyMode = true
         mediumMode = false
         hardMode = false
+        wC = 0
+        winC.innerText = `Wins: ${wC}`
     } else if (modeText === "medium") {
         easyMode = false
         mediumMode = true
-        hardMode = false   
+        hardMode = false  
+        wC = 0 
+        winC.innerText = `Wins: ${wC}`
     } else if (modeText === "hard") {
         easyMode = false
         mediumMode = false
         hardMode = true
+        wC = 0
+        winC.innerText = `Wins: ${wC}`
     }
     startGame()
 }
