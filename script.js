@@ -118,7 +118,7 @@ function errorCounter() {
 }
 
 function checkWinner() {
-    if (towers[2].childElementCount === 1) {
+    if (towers[2].childElementCount === 5) {
         clearInterval(secondsInterval)
         clearInterval(minutesInterval)
         winText.innerText = "You win!"
