@@ -9,6 +9,7 @@
 </head>
 <body>
     <p class="text title"><a href="javascript:location.reload()">Tower of Hanoi</a></p>
+    <button class="reset">Reset</button>
     <div class="container">
         <div class="text objective">Objective:</div>
         <div class="tower_container">
@@ -22,13 +23,16 @@
             <div class="tower" id="tower2"></div>
             <div class="tower" id="tower3"></div>
         </div>
-        <div class="moveContainer">
-            <div class="moveText text">Moves:</div>
-            <div class="counter text">0</div>
-            <div class="errorText text">Errors:</div>
-            <div class="errorC text">0</div>
+        <div class="winContainer">
+            <div class="winText text"></div>
+            <div class="playAgain text"></div>
         </div>
-        <div class="winText text">---</div>
+        <div class="statContainer">
+            <div class="moveText counter text">Moves: 0</div>
+            <div class="errorText errorC text">Errors: 0</div>
+            <div class="winC text">Wins: 0</div>
+            <div class="text"><span class="timerMin">00:</span><span class="timerSec">00</span></div>
+        </div>
     </div>
     <script src="script.js"></script>
 </body>
