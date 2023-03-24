@@ -13,18 +13,40 @@
     color: white;
 }
 
+.objective {
+    grid-column-start: 1;
+    grid-row-start: 2;
+}
+
+.mode:hover {
+    text-decoration: underline;
+    font-style: italic;
+}
+
+.modeContainer {
+    display: flex;
+    justify-content: space-around;
+    grid-row: 1;
+    grid-column: 2;
+}
+
 .winContainer {
     display: flex;
     flex-direction: column;
     align-items: center;
     grid-column-start: 2;
-    grid-row-start: 2;
+    grid-row-start: 3;
 }
 
 .playAgain {
     display: flex;
     justify-content: center;
     grid-column-start: 2;
+    grid-row-start: 2;
+}
+
+.statContainer {
+    grid-column-start: 3;
     grid-row-start: 2;
 }
 
@@ -39,7 +61,7 @@ body {
 .container {
     display: grid;
     grid-template-columns: 15% 70% 15%;
-    grid-template-rows: 3fr 1fr;
+    grid-template-rows: 1fr 3fr 1fr;
 }
 
 .tower_container {
@@ -47,6 +69,7 @@ body {
     grid-template-columns: 250px 250px 250px;
     grid-template-rows: 250px;
     grid-column-start: 2;
+    grid-row-start: 2;
     justify-content: center;
 }
 
@@ -86,7 +109,7 @@ body {
     80% { transform: translate(-1px, -1px) rotate(1deg); }
     90% { transform: translate(1px, 2px) rotate(0deg); }
     100% { transform: translate(1px, -2px) rotate(-1deg); }
-  }
+}
 
 #b2 {
     width: 80px;

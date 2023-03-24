@@ -19,9 +19,14 @@ let playAgain = document.querySelector(".playAgain")
 let secondsInterval
 let minutesInterval
 let reset = document.querySelector(".reset")
+let easyMode = true
+let mediumMode = false
+let hardMode = false
 startGame()
 
 reset.addEventListener("click", resetBoard)
+
+console.log(towers)
 
 blocks.forEach((block) => {
     block.addEventListener("mouseover", () => {
@@ -36,6 +41,7 @@ function startGame() {
     towers.forEach((tower) => {
         tower.addEventListener("click", firstMove)
     })
+    mode()
 }
 
 function firstMove(e) {
@@ -54,13 +60,6 @@ function firstMove(e) {
             checkWinner()
         }
     }
-
-    // if (init === null && e.target.ElementCount >= 1 && (e.target !== towers[0].firstElementChild || e.target !== towers[1].firstElementChild || e.target !== towers[2].firstElementChild)) {
-    //     init = e.target
-    //     errorCounter()
-    //     shakes()
-    //     init.style.border = "solid black"
-    // }
 }
 
 function move() {
@@ -118,15 +117,39 @@ function errorCounter() {
 }
 
 function checkWinner() {
-    if (towers[2].childElementCount === 5) {
-        clearInterval(secondsInterval)
-        clearInterval(minutesInterval)
-        winText.innerText = "You win!"
-       wC++
-       winC.innerText = `Wins: ${wC}`
-       playAgain.innerText = "Play again?"
-       playAgain.addEventListener("click", resetBoard)
-       winState = true
+    if (hardMode === true) {
+        if (towers[2].childElementCount === 5) {
+            clearInterval(secondsInterval)
+            clearInterval(minutesInterval)
+            winText.innerText = "You win!"
+            wC++
+            winC.innerText = `Wins: ${wC}`
+            playAgain.innerText = "Play again?"
+            playAgain.addEventListener("click", resetBoard)
+            winState = true
+        }
+    } else if (mediumMode === true) {
+        if (towers[2].childElementCount === 4) {
+            clearInterval(secondsInterval)
+            clearInterval(minutesInterval)
+            winText.innerText = "You win!"
+           wC++
+           winC.innerText = `Wins: ${wC}`
+           playAgain.innerText = "Play again?"
+           playAgain.addEventListener("click", resetBoard)
+           winState = true
+        }
+    } else if (easyMode === true) {
+        if (towers[2].childElementCount === 3) {
+            clearInterval(secondsInterval)
+            clearInterval(minutesInterval)
+            winText.innerText = "You win!"
+           wC++
+           winC.innerText = `Wins: ${wC}`
+           playAgain.innerText = "Play again?"
+           playAgain.addEventListener("click", resetBoard)
+           winState = true
+        }
     }
 }
 
@@ -135,8 +158,8 @@ function resetBoard () {
     eC = 0
     i = 0
     j = 0
-    if (towers[2].childElementCount !== 0) {
-        towers[2].removeChild(towers[2].firstChild)
+    if (towers[2].childElementCount !== 0 || towers[1].childElementCount !==0) {
+        // towers[2].removeChild(towers[2].firstChild)
         for (let bi = 0; bi < 5; bi++) {
             towers[0].append(blocks[bi])
         }
@@ -151,6 +174,15 @@ function resetBoard () {
         winText.innerText = ""
     }
     startGame()
+}
+
+function mode() {
+    if (easyMode === true) {
+        towers[0].removeChild(towers[0].lastElementChild)
+        towers[0].removeChild(towers[0].lastElementChild)
+    } else if (mediumMode === true) {
+        towers[0].removeChild(towers[0].lastElementChild)
+    }
 }
 
 function timer() {
