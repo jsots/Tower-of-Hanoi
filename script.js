@@ -131,34 +131,34 @@ function checkWinner() {
         if (towers[2].childElementCount === 5) {
             clearInterval(secondsInterval)
             clearInterval(minutesInterval)
+            winState = true
             winText.innerText = "You win!"
             wC++
             winC.innerText = `Wins: ${wC}`
             playAgain.innerText = "Play again?"
             playAgain.addEventListener("click", resetBoard)
-            winState = true
         }
     } else if (mediumMode === true) {
         if (towers[2].childElementCount === 4) {
             clearInterval(secondsInterval)
             clearInterval(minutesInterval)
+            winState = true
             winText.innerText = "You win!"
             wC++
             winC.innerText = `Wins: ${wC}`
             playAgain.innerText = "Play again?"
             playAgain.addEventListener("click", resetBoard)
-            winState = true
         }
     } else if (easyMode === true) {
         if (towers[2].childElementCount === 3) {
             clearInterval(secondsInterval)
             clearInterval(minutesInterval)
+            winState = true
             winText.innerText = "You win!"
             wC++
             winC.innerText = `Wins: ${wC}`
             playAgain.innerText = "Play again?"
             playAgain.addEventListener("click", resetBoard)
-            winState = true
         }
     }
 }
@@ -204,19 +204,19 @@ function mode() {
 
 function changeMode(e) {
     let modeText = e.target.innerText.toLowerCase()
-    if (modeText === "easy") {
+    if (modeText === "easy" && winState === false) {
         easyMode = true
         mediumMode = false
         hardMode = false
         wC = 0
         winC.innerText = `Wins: ${wC}`
-    } else if (modeText === "medium") {
+    } else if (modeText === "medium" && winState === false) {
         easyMode = false
         mediumMode = true
         hardMode = false  
         wC = 0 
         winC.innerText = `Wins: ${wC}`
-    } else if (modeText === "hard") {
+    } else if (modeText === "hard" && winState === false) {
         easyMode = false
         mediumMode = false
         hardMode = true
