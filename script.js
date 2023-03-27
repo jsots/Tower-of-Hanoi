@@ -20,7 +20,6 @@ let secondsInterval
 let minutesInterval
 let b4 = document.querySelector("#b4")
 let b5 = document.querySelector("#b5")
-let reset = document.querySelector(".reset")
 let easy = document.querySelector(".easy")
 let medium = document.querySelector(".medium")
 let hard = document.querySelector(".hard")
@@ -29,7 +28,7 @@ let mediumMode = false
 let hardMode = false
 startGame()
 
-reset.addEventListener("click", resetBoard)
+// reset.addEventListener("click", resetBoard)
 
 blocks.forEach((block) => {
     block.addEventListener("mouseover", () => {
@@ -204,22 +203,25 @@ function mode() {
 
 function changeMode(e) {
     let modeText = e.target.innerText.toLowerCase()
-    if (modeText === "easy" && winState === false) {
+    if (modeText === "easy" && winState === false && easyMode === false) {
         easyMode = true
         mediumMode = false
         hardMode = false
+        resetBoard()
         wC = 0
         winC.innerText = `Wins: ${wC}`
-    } else if (modeText === "medium" && winState === false) {
+    } else if (modeText === "medium" && winState === false && mediumMode === false) {
         easyMode = false
         mediumMode = true
         hardMode = false  
+        resetBoard()
         wC = 0 
         winC.innerText = `Wins: ${wC}`
-    } else if (modeText === "hard" && winState === false) {
+    } else if (modeText === "hard" && winState === false && hardMode === false) {
         easyMode = false
         mediumMode = false
         hardMode = true
+        resetBoard()
         wC = 0
         winC.innerText = `Wins: ${wC}`
     }
@@ -258,3 +260,44 @@ function incrementJ () {
         timerMin.innerText = "0" + `${j}` + ":" 
     }
 }
+
+// Solve algorithm below:
+let b1 = document.querySelector("#b1")
+let b2 = document.querySelector("#b2")
+let b3 = document.querySelector("#b3")
+let source = document.querySelector("#t1")
+let aux = document.querySelector("#t2")
+let dest = document.querySelector("#t3")
+
+// Below defines the move function:
+
+function moveBlockToSolve (b, source, dest) {
+    source.removeChild(b);
+    dest.prepend(b);
+}
+
+// Below defines the recursive function:
+
+function  solveTowersOfHanoi (n, source, dest, aux) {
+    // The base condition, moving the very top block:
+    if (n === 1) {
+        moveBlockToSolve(b1, source, dest);
+        return;
+    }
+    // Recursive condition, what will happen to the other blocks
+    solveTowersOfHanoi(n-1, source, aux, dest);
+    moveBlockToSolve(window[`b${n}`], source, dest);
+    solveTowersOfHanoi(n-1, aux, dest, source);
+}
+
+let solve = document.querySelector(".solve")
+
+solve.addEventListener("click", function () {
+    if (easyMode === true) {
+        solveTowersOfHanoi(3, source, dest, aux)
+    } else if (mediumMode === true) {
+        solveTowersOfHanoi(4, source, dest, aux)
+    } else if (hardMode === true) {
+        solveTowersOfHanoi(5, source, dest, aux)
+    }
+})
