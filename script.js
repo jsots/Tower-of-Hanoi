@@ -26,6 +26,7 @@ let hard = document.querySelector(".hard")
 let easyMode = true
 let mediumMode = false
 let hardMode = false
+let ol = document.querySelector("ol")
 startGame()
 
 // reset.addEventListener("click", resetBoard)
@@ -136,6 +137,7 @@ function checkWinner() {
             winC.innerText = `Wins: ${wC}`
             playAgain.innerText = "Play again?"
             playAgain.addEventListener("click", resetBoard)
+            removeAllChildren(ol)
         }
     } else if (mediumMode === true) {
         if (towers[2].childElementCount === 4) {
@@ -147,6 +149,7 @@ function checkWinner() {
             winC.innerText = `Wins: ${wC}`
             playAgain.innerText = "Play again?"
             playAgain.addEventListener("click", resetBoard)
+            removeAllChildren(ol)
         }
     } else if (easyMode === true) {
         if (towers[2].childElementCount === 3) {
@@ -158,6 +161,7 @@ function checkWinner() {
             winC.innerText = `Wins: ${wC}`
             playAgain.innerText = "Play again?"
             playAgain.addEventListener("click", resetBoard)
+            removeAllChildren(ol)
         }
     }
 }
@@ -181,8 +185,15 @@ function resetBoard () {
         clock = false
         playAgain.innerText = ""
         winText.innerText = ""
+        removeAllChildren(ol)
     }
     startGame()
+}
+
+function removeAllChildren (parent) {
+    while (parent.firstChild) {
+        parent.removeChild(parent.firstChild)
+    }
 }
 
 function mode() {
@@ -210,6 +221,7 @@ function changeMode(e) {
         resetBoard()
         wC = 0
         winC.innerText = `Wins: ${wC}`
+        removeAllChildren(ol)
     } else if (modeText === "medium" && winState === false && mediumMode === false) {
         easyMode = false
         mediumMode = true
@@ -217,6 +229,7 @@ function changeMode(e) {
         resetBoard()
         wC = 0 
         winC.innerText = `Wins: ${wC}`
+        removeAllChildren(ol)
     } else if (modeText === "hard" && winState === false && hardMode === false) {
         easyMode = false
         mediumMode = false
@@ -224,6 +237,7 @@ function changeMode(e) {
         resetBoard()
         wC = 0
         winC.innerText = `Wins: ${wC}`
+        removeAllChildren(ol)
     }
     startGame()
 }
@@ -268,6 +282,7 @@ let b3 = document.querySelector("#b3")
 let source = document.querySelector("#t1")
 let aux = document.querySelector("#t2")
 let dest = document.querySelector("#t3")
+let solutionText = document.querySelector(".solution-container")
 
 // Below defines the move function:
 
@@ -275,7 +290,6 @@ function moveBlockToSolve (b, source, dest) {
     source.removeChild(b);
     dest.prepend(b);
     moveCounter()
-   
 }
 
 // Below defines the recursive function:
@@ -283,23 +297,29 @@ function moveBlockToSolve (b, source, dest) {
 function  solveTowersOfHanoi (n, source, dest, aux) {
     // The base condition, moving the very top block:
     if (n === 1) {
-        moveBlockToSolve(b1, source, dest);
+        // moveBlockToSolve(b1, source, dest);
+        let li = document.createElement("li")
+        li.innerText = `Move disk ${n} from ${source.id} to ${dest.id}`
+        solutionText.append(li)
         return;
     }
     // Recursive condition, what will happen to the other blocks
     solveTowersOfHanoi(n-1, source, aux, dest);
-    moveBlockToSolve(window[`b${n}`], source, dest);
+    let li = document.createElement("li")
+    li.innerText = `Move disk ${n} from ${source.id} to ${dest.id}`
+    solutionText.append(li)
+    // moveBlockToSolve(window[`b${n}`], source, dest);
     solveTowersOfHanoi(n-1, aux, dest, source);
 }
 
 let solve = document.querySelector(".solve")
 
 solve.addEventListener("click", function () {
-    if (easyMode === true) {
+    if (easyMode === true && ol.childElementCount === 0) {
         solveTowersOfHanoi(3, source, dest, aux)
-    } else if (mediumMode === true) {
+    } else if (mediumMode === true && ol.childElementCount === 0) {
         solveTowersOfHanoi(4, source, dest, aux)
-    } else if (hardMode === true) {
+    } else if (hardMode === true && ol.childElementCount === 0) {
         solveTowersOfHanoi(5, source, dest, aux)
     }
 })
