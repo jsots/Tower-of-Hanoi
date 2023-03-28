@@ -274,6 +274,8 @@ let dest = document.querySelector("#t3")
 function moveBlockToSolve (b, source, dest) {
     source.removeChild(b);
     dest.prepend(b);
+    moveCounter()
+   
 }
 
 // Below defines the recursive function:
