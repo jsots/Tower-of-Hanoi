@@ -1,11 +1,6 @@
-/* @font-face {
+@font-face {
     font-family: arcadeT;
     src: url("arcadeTFont.otf");
-} */
-
-@font-face {
-    font-family: vector;
-    src: url("vectorFont.ttf");
 }
 
 .title {
@@ -20,26 +15,12 @@
 
 .objective {
     grid-column-start: 1;
-    grid-row: 1 / span 2;
-}
-
-.mode {
-    text-shadow: 0px 0px 15px hotpink
+    grid-row-start: 2;
 }
 
 .mode:hover {
     text-decoration: underline;
     font-style: italic;
-    color: hotpink;
-    cursor: pointer;
-}
-
-
-.playAgain:hover {
-    text-decoration: underline;
-    font-style: italic;
-    color: hotpink;
-    cursor: pointer;
 }
 
 .modeContainer {
@@ -62,14 +43,11 @@
     justify-content: center;
     grid-column-start: 2;
     grid-row-start: 2;
-    font-size: 25px;
-    text-shadow: 0px 0px 15px hotpink, 0px 0px 15px hotpink
 }
 
 .statContainer {
     grid-column-start: 3;
     grid-row-start: 2;
-    text-align: right;
 }
 
 .title a:hover {
@@ -105,7 +83,6 @@ body {
 
 .text {
     color:white;
-    font-family: vector;
 }
 
 .block {
@@ -170,17 +147,4 @@ body {
 	border-radius: 7px;
     box-shadow: 0 .2em gray; 
     cursor: pointer;
-    font-family: vector;
 }
-
-@media (max-width: 900px) {
-    .statContainer {
-        position: fixed;
-        bottom: 0;
-        right: 0;
-        text-align: right;
-    }
-    .objective {
-        grid-row-start: 3;
-    }
-  }

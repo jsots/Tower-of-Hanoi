@@ -11,11 +11,18 @@
     <p class="text title"><a href="javascript:location.reload()">Tower of Hanoi</a></p>
     <div class="container">
         <div class="modeContainer">
-            <div class="text easy mode">Easy</div>
-            <div class="text medium mode">Medium</div>
-            <div class="text hard mode">Hard</div>
+            <div class="text"><span class="easy mode">Easy</span></div>
+            <div class="text"><span class="medium mode">Medium</span></div>
+            <div class="text"><span class="hard mode">Hard</span></div>
         </div>
-        <div class="text objective">Objective:</div>
+        <div class="text objective">Objective:
+            <ul>
+                <li class="text">Only one disk can be moved at a time</li>
+                <li class="text">Only the uppermost disk can be moved</li>
+                <li class="text">No larger disk may be placed on top of a smaller disk</li>
+                <li class="text">Restack the disks in the right-most tower</li>
+            </ul>
+        </div>
         <div class="tower_container">
             <div class="tower" id="t1">
                 <div id="b1" class="1 block"></div>
@@ -29,9 +36,9 @@
         </div>
         <div class="winContainer">
             <button class="solve">Solve</button>
-            <ol class="solution-container text"></ol>
             <div class="winText text"></div>
             <div class="playAgain text"></div>
+            <ol class="solution-container text"></ol>
         </div>
         <div class="statContainer">
             <div class="moveText counter text">Moves: 0</div>

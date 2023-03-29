@@ -18,6 +18,9 @@ let winState = false
 let playAgain = document.querySelector(".playAgain")
 let secondsInterval
 let minutesInterval
+let b1 = document.querySelector("#b1")
+let b2 = document.querySelector("#b2")
+let b3 = document.querySelector("#b3")
 let b4 = document.querySelector("#b4")
 let b5 = document.querySelector("#b5")
 let easy = document.querySelector(".easy")
@@ -26,6 +29,7 @@ let hard = document.querySelector(".hard")
 let easyMode = true
 let mediumMode = false
 let hardMode = false
+let solved = false
 let ol = document.querySelector("ol")
 startGame()
 
@@ -276,9 +280,6 @@ function incrementJ () {
 }
 
 // Solve algorithm below:
-let b1 = document.querySelector("#b1")
-let b2 = document.querySelector("#b2")
-let b3 = document.querySelector("#b3")
 let source = document.querySelector("#t1")
 let aux = document.querySelector("#t2")
 let dest = document.querySelector("#t3")
@@ -293,23 +294,27 @@ function moveBlockToSolve (b, source, dest) {
 }
 
 // Below defines the recursive function:
+let stepCount = 0
 
 function  solveTowersOfHanoi (n, source, dest, aux) {
     // The base condition, moving the very top block:
     if (n === 1) {
-        // moveBlockToSolve(b1, source, dest);
+        stepCount++
+        setTimeout(() => {moveBlockToSolve(b1, source, dest)}, 500*stepCount);
         let li = document.createElement("li")
         li.innerText = `Move disk ${n} from ${source.id} to ${dest.id}`
-        solutionText.append(li)
+        setTimeout(() => {solutionText.append(li)}, 500*stepCount) // The stepCount will allow for this to happen step-by-step
         return;
     }
     // Recursive condition, what will happen to the other blocks
     solveTowersOfHanoi(n-1, source, aux, dest);
     let li = document.createElement("li")
     li.innerText = `Move disk ${n} from ${source.id} to ${dest.id}`
-    solutionText.append(li)
-    // moveBlockToSolve(window[`b${n}`], source, dest);
+    stepCount++
+    setTimeout(() => {solutionText.append(li)}, 500*stepCount)
+    setTimeout(() => {moveBlockToSolve(window[`b${n}`], source, dest)}, 500*stepCount);
     solveTowersOfHanoi(n-1, aux, dest, source);
+    solved = true
 }
 
 let solve = document.querySelector(".solve")
