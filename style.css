@@ -172,7 +172,7 @@ body {
     grid-column-start: 1;
 }
 
-.solve {
+.solve, .reset {
     text-align: center;
 	display: inline-block;
 	margin:5px;

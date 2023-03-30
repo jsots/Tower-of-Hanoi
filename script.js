@@ -26,6 +26,7 @@ let b5 = document.querySelector("#b5")
 let easy = document.querySelector(".easy")
 let medium = document.querySelector(".medium")
 let hard = document.querySelector(".hard")
+let resetButton = document.querySelector(".reset")
 let easyMode = true
 let mediumMode = false
 let hardMode = false
@@ -49,6 +50,8 @@ if (winState === false) {
     medium.addEventListener("click", changeMode)
     hard.addEventListener("click", changeMode)
 }
+
+resetButton.addEventListener("click", resetBoard)
 
 function startGame() {
     winState = false
