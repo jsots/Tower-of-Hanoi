@@ -5,23 +5,33 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tower of Hanoi</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&family=Roboto:wght@300&display=swap" rel="stylesheet">
     <link href="style.css" rel="stylesheet">
 </head>
 <body>
-    <p class="text title"><a href="javascript:location.reload()">Tower of Hanoi</a></p>
+    <p class="text title"><a href="javascript:location.reload()" id="title">Tower of Hanoi</a></p>
     <div class="container">
         <div class="modeContainer">
             <div class="text"><span class="easy mode">Easy</span></div>
             <div class="text"><span class="medium mode">Medium</span></div>
             <div class="text"><span class="hard mode">Hard</span></div>
         </div>
-        <div class="text objective">Objective:
-            <ul>
-                <li class="text">Only one disk can be moved at a time</li>
-                <li class="text">Only the uppermost disk can be moved</li>
-                <li class="text">No larger disk may be placed on top of a smaller disk</li>
-                <li class="text">Restack the disks in the right-most tower</li>
-            </ul>
+        <div class="rule-container">
+            <div class="text"><a class="rule" id="how-to">How to play:</a>
+                <ul>
+                    <li class="objective">Click the disk you wish to move, then click it's destination</li>
+                </ul>
+            </div>
+            <div class="text"><a class="rule" id="objective">Objective:</a>
+                <ul>
+                    <li class="objective">Only one disk can be moved at a time</li>
+                    <li class="objective">Only the uppermost disk can be moved</li>
+                    <li class="objective">Larger disks may not be placed on top of smaller disks</li>
+                    <li class="objective">Restack the disks in the right-most tower</li>
+                </ul>
+            </div>
         </div>
         <div class="tower_container">
             <div class="tower" id="t1">
